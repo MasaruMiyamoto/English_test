@@ -17,26 +17,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.myTableView.dataSource = self;
-    //self.myTableView.delegate = self;
+    self.cells = [NSMutableArray array];
+	self.tv.dataSource = self;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 //テーブルの行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return [self.cells count];
+//    return 5;
 }
 
 //行に表示するデータ
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @"Cell"];
+    UITableViewCell *tvcell = [tableView dequeueReusableCellWithIdentifier:@"cid"];
+    if (tvcell == nil){
+        tvcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @"cid"];
     }
-    cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d行目のセル",indexPath.row + 1];
-    return cell;
+    tvcell.textLabel.text = [[NSString alloc] initWithFormat:@"%d行目のセル",indexPath.row + 1];
+    return tvcell;
 }
 
 
@@ -44,6 +44,35 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)insertCell:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"test"
+                          message:@"Yes-No test"
+                          delegate:self
+                          cancelButtonTitle:@"cancel"
+                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    
+    [self.cells addObject:[[NSString alloc] initWithFormat:@"%d行目のセル",[self.cells count] + 1]];
+     [self.tv reloadData];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 1){
+        
+    }else{
+        
+    }
+}
+
+- (IBAction)deleteAll:(id)sender {
+    self.cells = [NSMutableArray array];
+    [self.tv reloadData];
+}
+
+-(IBAction) cancelView:(UIStoryboardSegue *)segue{
 }
 
 @end
