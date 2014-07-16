@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UIViewController
+@interface EditViewController : UIViewController <UITextFieldDelegate> {
+    UITextField *activeField;
+}
+@property (weak, nonatomic) IBOutlet UITextField *text1;
+@property (weak, nonatomic) IBOutlet UITextField *text2;
+@property (weak, nonatomic) IBOutlet UITextField *text3;
+@property (weak, nonatomic) IBOutlet UITextField *text4;
+
+- (IBAction)decide:(id)sender;
+
 
 @end

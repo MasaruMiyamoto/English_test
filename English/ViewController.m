@@ -47,25 +47,11 @@
 }
 
 - (IBAction)insertCell:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"test"
-                          message:@"Yes-No test"
-                          delegate:self
-                          cancelButtonTitle:@"cancel"
-                          otherButtonTitles:@"OK", nil];
-    [alert show];
-    
+        
     [self.cells addObject:[[NSString alloc] initWithFormat:@"%d行目のセル",[self.cells count] + 1]];
      [self.tv reloadData];
 }
 
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex == 1){
-        
-    }else{
-        
-    }
-}
 
 - (IBAction)deleteAll:(id)sender {
     self.cells = [NSMutableArray array];
@@ -75,4 +61,8 @@
 -(IBAction) cancelView:(UIStoryboardSegue *)segue{
 }
 
+-(IBAction) decideView:(UIStoryboardSegue *)segue{
+    [self.cells addObject:[[NSString alloc] initWithFormat:@"%d行目のセル",[self.cells count] + 1]];
+    [self.tv reloadData];
+}
 @end
